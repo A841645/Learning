@@ -1,0 +1,14 @@
+---
+- name: Query information about Azure
+  hosts: localhost
+  gather_facts: no
+  #sudo: no
+  #become: true
+  ##become_user: svc_app_ansible_02
+  vars:
+    rg: "/home/atosadm"
+  tasks:
+      - shell: "ls {{rg}}"
+        register: dir_out
+      - debug: var={{item}}
+        with_items: dir_out.stdout_lines
